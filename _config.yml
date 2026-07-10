@@ -1,0 +1,45 @@
+title: Paper Review Archive
+description: A personal archive of papers I study — notes, summaries, and takeaways.
+author: jiyoon0630
+lang: en
+
+# The site is served as a GitHub *project* page, so it lives under /paper-reivew.
+url: "https://jiyoon0630.github.io"
+baseurl: "/paper-reivew"
+
+# --- Build settings ---
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  math_engine: null          # let MathJax handle all math (both $...$ and $$...$$)
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    default_lang: text
+
+permalink: /papers/:title/
+
+# Every paper (a post in _posts/) uses the paper layout by default.
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: paper
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Newest papers first on the home page.
+sass:
+  style: compressed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .github
+  - templates
