@@ -1,0 +1,32 @@
+---
+layout: default
+---
+<article class="paper">
+  <header class="paper-header">
+    <p class="back"><a href="{{ '/' | relative_url }}">← All papers</a></p>
+    <h1 class="paper-title">{{ page.title }}</h1>
+    <div class="paper-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+      {% if page.authors %}<span class="dot">·</span><span class="authors">{{ page.authors }}</span>{% endif %}
+      {% if page.venue %}<span class="dot">·</span><span class="venue">{{ page.venue }}</span>{% endif %}
+    </div>
+
+    {% if page.tags and page.tags.size > 0 %}
+    <div class="tags">
+      {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if page.paper_url or page.code_url %}
+    <p class="links">
+      {% if page.paper_url %}<a href="{{ page.paper_url }}" target="_blank" rel="noopener">📄 Paper</a>{% endif %}
+      {% if page.paper_url and page.code_url %}<span class="dot">·</span>{% endif %}
+      {% if page.code_url %}<a href="{{ page.code_url }}" target="_blank" rel="noopener">💻 Code</a>{% endif %}
+    </p>
+    {% endif %}
+  </header>
+
+  <div class="paper-body">
+    {{ content }}
+  </div>
+</article>
