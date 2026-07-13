@@ -6,21 +6,29 @@ layout: default
   <p>{{ site.description }}</p>
 </section>
 
+{% assign en_posts = site.posts | where: "lang", "en" %}
+{% assign ko_posts = site.posts | where: "lang", "ko" %}
+<section class="lang-switch" id="lang-switch" aria-label="Choose language">
+  <button class="lang-btn active" data-lang="en">English ({{ en_posts | size }})</button>
+  <button class="lang-btn" data-lang="ko">한국어 ({{ ko_posts | size }})</button>
+</section>
+
 <section class="filters" id="tag-filters" aria-label="Filter papers by tag">
-  <button class="filter-btn active" data-tag="all">All ({{ site.posts | size }})</button>
+  <button class="filter-btn active" data-tag="all">All</button>
   {% assign sorted_tags = site.tags | sort %}
   {% for tag in sorted_tags %}
-  <button class="filter-btn" data-tag="{{ tag[0] | slugify }}">{{ tag[0] }} ({{ tag[1] | size }})</button>
+  <button class="filter-btn" data-tag="{{ tag[0] | slugify }}">{{ tag[0] }}</button>
   {% endfor %}
 </section>
 
 {% if site.posts.size == 0 %}
 <p class="empty">No papers yet. Add your first one in <code>_posts/</code>.</p>
 {% endif %}
+<p class="empty" id="empty-lang" hidden>No papers in this language yet.</p>
 
 <ul class="paper-list">
   {% for post in site.posts %}
-  <li class="paper-item" data-tags="{% for t in post.tags %}{{ t | slugify }} {% endfor %}">
+  <li class="paper-item" data-lang="{{ post.lang | default: 'en' }}" data-tags="{% for t in post.tags %}{{ t | slugify }} {% endfor %}">
     <div class="paper-item-head">
       <time class="paper-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
       <a href="{{ post.url | relative_url }}" class="paper-title-link">{{ post.title }}</a>

@@ -1,5 +1,6 @@
 ---
 layout: paper
+lang: en
 title: "Welcome — how a paper note is formatted"
 date: 2026-07-10
 tags: [Meta]
